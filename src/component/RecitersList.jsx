@@ -127,7 +127,7 @@ export default function RecitersList() {
       }}
     >
       {loading ? (
-        <Loader />
+        <h1>Loading ...</h1>
       ) : (
         <CardContainer>
           <Titel>قائمة المقرئين</Titel>

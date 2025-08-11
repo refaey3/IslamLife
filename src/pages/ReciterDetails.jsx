@@ -154,7 +154,7 @@ export default function ReciterDetails() {
   return (
     <div>
       {loading ? (
-        <Loader />
+        <h1>Loading</h1>
       ) : (
         <Container>
           <Wrapper>
