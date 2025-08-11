@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-"vercel-build": "npm install --legacy-peer-deps && vite build"
+    "vercel-build": "npm install --legacy-peer-deps && vite build"
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.3",

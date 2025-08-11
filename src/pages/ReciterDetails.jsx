@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../component/Loader";
 import Container from "../component/Container";
@@ -31,6 +31,7 @@ const SurahList = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;
+  direction: rtl;
 `;
 
 const SurahItem = styled.li`
@@ -53,11 +54,12 @@ const Buttons = styled.div`
   justify-content: center;
 `;
 
-const Button = styled.a`
+const Button = styled.button`
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 14px;
-  text-decoration: none;
+  border: none;
+  cursor: pointer;
   color: #fff;
   background-color: ${(props) => (props.play ? "#27ae60" : "#2980b9")};
   transition: 0.3s;
@@ -80,6 +82,9 @@ export default function ReciterDetails() {
   const [suwar, setSuwar] = useState([]);
   const [selectedMoshaf, setSelectedMoshaf] = useState(null);
   const [filteredSuwar, setFilteredSuwar] = useState([]);
+  const [currentAudio, setCurrentAudio] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,8 +134,25 @@ export default function ReciterDetails() {
 
     setFilteredSuwar(filtered);
   };
+
+  const handlePlay = (surahId) => {
+    const audioUrl = `${selectedMoshaf.server}${String(surahId).padStart(
+      3,
+      "0"
+    )}.mp3`;
+
+    if (currentAudio === audioUrl && isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      setCurrentAudio(audioUrl);
+      audioRef.current.src = audioUrl;
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
   return (
- <div>
+    <div>
       {loading ? (
         <Loader />
       ) : (
@@ -148,27 +170,45 @@ export default function ReciterDetails() {
               ))}
             </Select>
             <SurahList>
-              {filteredSuwar.map((surah) => (
-                <SurahItem key={surah.id}>
-                  <SurahTitle>{`${surah.id} - ${surah.name}`}</SurahTitle>
-                  <Buttons>
-                    <Button
-                      play
-                      href={`${selectedMoshaf.server}${String(surah.id).padStart(3, "0")}.mp3`}
-                      target="_blank"
-                    >
-                      ▶ تشغيل
-                    </Button>
-                    <Button
-                      href={`${selectedMoshaf.server}${String(surah.id).padStart(3, "0")}.mp3`}
-                      download
-                    >
-                      ⬇ تحميل
-                    </Button>
-                  </Buttons>
-                </SurahItem>
-              ))}
+              {filteredSuwar.map((surah) => {
+                const audioUrl = `${selectedMoshaf.server}${String(
+                  surah.id
+                ).padStart(3, "0")}.mp3`;
+
+                return (
+                  <SurahItem key={surah.id}>
+                    <SurahTitle>{`${surah.id} - ${surah.name}`}</SurahTitle>
+                    <Buttons>
+                      <Button
+                        $play={currentAudio === audioUrl && isPlaying}
+                        onClick={() => handlePlay(surah.id)}
+                      >
+                        {currentAudio === audioUrl && isPlaying
+                          ? "⏸ إيقاف مؤقت"
+                          : "▶ تشغيل"}
+                      </Button>
+                      <Button as="a" href={audioUrl} download>
+                        ⬇ تحميل
+                      </Button>
+                    </Buttons>
+                  </SurahItem>
+                );
+              })}
             </SurahList>
+            {currentAudio && (
+              <div style={{ marginTop: "20px" }}>
+                <audio
+                  ref={audioRef}
+                  controls
+                  style={{ width: "100%" }}
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                >
+                  <source src={currentAudio} type="audio/mpeg" />
+                  متصفحك لا يدعم تشغيل الصوت
+                </audio>
+              </div>
+            )}
           </Wrapper>
         </Container>
       )}
