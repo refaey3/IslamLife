@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import Navigation from "./Navigation";
+import Navigation from "../Comon/Navigation";
 const topDown = keyframes`
   0% {
     transform: translateY(-20px);
@@ -27,6 +27,7 @@ const HomePage = styled("div")`
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+  position: relative;
 `;
 const Info = styled("div")`
   position: absolute;
@@ -96,7 +97,6 @@ export default function Home() {
   return (
     <>
       <HomePage $bg={imgBg}>
-        <Navigation />
         <Ovelay />
         <Info>
           <h1>

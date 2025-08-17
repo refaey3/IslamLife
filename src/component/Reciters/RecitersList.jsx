@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Loader from "./Loader";
+import Loader from "../Comon/Loader";
 import Reciter from "./Reciters";
 import styled from "styled-components";
 import RecitersFilter from "./RecitersFilter";
@@ -8,9 +8,8 @@ const Container = styled("div")`
   display: grid;
   gap: 20px;
   margin-top: 27px;
-
+  position: relative;
   grid-template-columns: repeat(5, 1fr);
-
   @media (max-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -20,7 +19,8 @@ const Container = styled("div")`
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 295px;
+    left: 36px;
   }
   padding-right: 15px;
   padding-left: 15px;
@@ -59,6 +59,7 @@ const Titel = styled("h2")`
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
   position: relative;
   top: 20px;
+  left: -1px;
 `;
 const Input = styled("input")`
   padding: 10px 15px;
@@ -95,7 +96,7 @@ export default function RecitersList() {
   const [reciters, setReciters] = useState([]);
   const [selectedLetter, setSelectedLetter] = useState("الكل");
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [visbleCount, setVisbleCount] = useState(30);
   useEffect(() => {
     const recitersApi = async () => {
       try {
@@ -121,30 +122,26 @@ export default function RecitersList() {
     return matchesLetter && matchesSearch;
   });
   return (
-    <div
-      style={{
-        backgroundColor: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
-      }}
-    >
-      {loading ? (
-        <h1>Loading ...</h1>
-      ) : (
-        <CardContainer>
-          <Titel>قائمة المقرئين</Titel>
-          <Input
-            type="text"
-            placeholder="ابحث باسم المقرئ..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <RecitersFilter
-            onSelectLetter={(letter) => setSelectedLetter(letter)}
-          />
-          <Container>
-            <AnimatePresence>
-              <Container>
-                <AnimatePresence mode="wait">
-                  {filteredReciters.map((reciter) => (
+    <div>
+      <CardContainer>
+        <Titel>قائمة المقرئين</Titel>
+        <Input
+          type="text"
+          placeholder="ابحث باسم المقرئ..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <RecitersFilter
+          onSelectLetter={(letter) => setSelectedLetter(letter)}
+        />
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <Container>
+              <AnimatePresence mode="wait">
+                <>
+                  {filteredReciters.slice(0, visbleCount).map((reciter) => (
                     <motion.div
                       key={reciter.id}
                       initial={{ opacity: 0, y: 10 }}
@@ -152,18 +149,33 @@ export default function RecitersList() {
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <Reciter
-                        name={reciter.name}
-                        id={reciter.id}
-                      />
+                      <Reciter name={reciter.name} id={reciter.id} />
                     </motion.div>
                   ))}
-                </AnimatePresence>
-              </Container>
-            </AnimatePresence>
-          </Container>
-        </CardContainer>
-      )}
+                </>
+              </AnimatePresence>
+            </Container>
+            {visbleCount < filteredReciters.length && (
+              <div style={{ textAlign: "center", marginTop: "20px" }}>
+                <button
+                  onClick={() => setVisbleCount((prev) => prev + 50)}
+                  style={{
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    border: "none",
+                    background: "#00cc66",
+                    color: "white",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  عرض المزيد
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </CardContainer>
     </div>
   );
 }

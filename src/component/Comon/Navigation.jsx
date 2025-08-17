@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FaBookReader, FaVideo, FaStar, FaCog, FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const NabBar = styled("nav")`
   display: flex;
   align-items: center;
@@ -11,7 +13,7 @@ const NabBar = styled("nav")`
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-
+  height: 60px;
   border-radius: 5px;
   padding: 20px 20px;
   color: white;
@@ -28,6 +30,7 @@ const Logo = styled("img")`
   height: 50px;
   border-radius: 50%;
   object-fit: contain;
+  cursor: pointer;
   @media (max-width: 767px) {
     display: none;
   }
@@ -84,7 +87,7 @@ const BurgerIconAndHome = styled("div")`
       background: rgba(22, 255, 22, 0.08);
     }
     &::before {
-      content: "";
+      // content: "";
       position: absolute;
       width: 2px;
       height: 150%;
@@ -112,7 +115,9 @@ const BurgerIconAndHome = styled("div")`
 export default function Navigation() {
   return (
     <NabBar>
-      <Logo src="/Logo.webp"></Logo>
+      <Link to="/">
+        <Logo src="/Logo.webp"></Logo>
+      </Link>
       <Rigth>
         <Links>
           <li>
@@ -126,7 +131,9 @@ export default function Navigation() {
           </li>
         </Links>
         <BurgerIconAndHome>
-          <p>الرئيسية</p>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <p>الرئيسية</p>
+          </Link>
           <FaBars />
         </BurgerIconAndHome>
         <BurgerIconAndHome></BurgerIconAndHome>

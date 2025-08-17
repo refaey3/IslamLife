@@ -1,28 +1,37 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Loader from "../component/Loader";
-import Container from "../component/Container";
+import Loader from "../component/Comon/Loader";
+import Container from "../component/Comon/Container";
 import styled from "styled-components";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 const Wrapper = styled.div`
   padding: 20px;
   max-width: 900px;
   margin: auto;
+  background: rgba(255, 255, 255, 0.05);
 `;
 
 const Title = styled.h1`
   font-size: 28px;
   margin-bottom: 20px;
-  color: #2c3e50;
+  color: #e0e7ff;
+  text-align: right;
 `;
 
 const Select = styled.select`
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ddd;
+  border: 1px solid #4b5e6d;
   border-radius: 6px;
   margin-bottom: 20px;
   width: 100%;
-  background-color: #f9f9f9;
+  background-color: #2d3748;
+  color: #e0e7ff;
+  &:focus {
+    outline: none;
+    border-color: #68d391;
+  }
 `;
 
 const SurahList = styled.ul`
@@ -35,17 +44,17 @@ const SurahList = styled.ul`
 `;
 
 const SurahItem = styled.li`
-  background-color: #fff;
-  border: 1px solid #eee;
+  background-color: #2d3748;
+  border: 1px solid #4b5e6d;
   padding: 10px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: 0.3s;
-
+  color: white;
   &:hover {
-    background-color: #f1f1f1;
+    background-color: #4a5568;
   }
 `;
 const Buttons = styled.div`
@@ -61,17 +70,21 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   color: #fff;
-  background-color: ${(props) => (props.play ? "#27ae60" : "#2980b9")};
+  background-color: ${(props) => (props.play ? "#68d391" : "#4299e1")};
   transition: 0.3s;
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 `;
 const SurahTitle = styled.div`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
+`;
+const Main = styled.div`
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
 `;
 export default function ReciterDetails() {
   const [loading, setLoading] = useState(true);
@@ -152,66 +165,67 @@ export default function ReciterDetails() {
     }
   };
   return (
-    <div>
+    <Main>
       {loading ? (
-        <h1>Loading</h1>
+        <Loader />
       ) : (
-        <Container>
-          <Wrapper>
-            <Title>{`القارئ الشيخ ${reciter.name}`}</Title>
-            <Select
-              value={selectedMoshaf?.id || ""}
-              onChange={(e) => handleMoshafChange(e.target.value)}
-            >
-              {moshafs.map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.name}
-                </option>
-              ))}
-            </Select>
-            <SurahList>
-              {filteredSuwar.map((surah) => {
-                const audioUrl = `${selectedMoshaf.server}${String(
-                  surah.id
-                ).padStart(3, "0")}.mp3`;
+        <Wrapper>
+          <Title>{`القارئ الشيخ ${reciter.name}`}</Title>
+          <Select
+            value={selectedMoshaf?.id || ""}
+            onChange={(e) => handleMoshafChange(e.target.value)}
+          >
+            {moshafs.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.name}
+              </option>
+            ))}
+          </Select>
+          <SurahList>
+            {filteredSuwar.map((surah) => {
+              const audioUrl = `${selectedMoshaf.server}${String(
+                surah.id
+              ).padStart(3, "0")}.mp3`;
 
-                return (
-                  <SurahItem key={surah.id}>
-                    <SurahTitle>{`${surah.id} - ${surah.name}`}</SurahTitle>
-                    <Buttons>
-                      <Button
-                        $play={currentAudio === audioUrl && isPlaying}
-                        onClick={() => handlePlay(surah.id)}
-                      >
-                        {currentAudio === audioUrl && isPlaying
-                          ? "⏸ إيقاف مؤقت"
-                          : "▶ تشغيل"}
-                      </Button>
-                      <Button as="a" href={audioUrl} download>
-                        ⬇ تحميل
-                      </Button>
-                    </Buttons>
-                  </SurahItem>
-                );
-              })}
-            </SurahList>
-            {currentAudio && (
-              <div style={{ marginTop: "20px" }}>
-                <audio
-                  ref={audioRef}
-                  controls
-                  style={{ width: "100%" }}
-                  onPlay={() => setIsPlaying(true)}
-                  onPause={() => setIsPlaying(false)}
-                >
-                  <source src={currentAudio} type="audio/mpeg" />
-                  متصفحك لا يدعم تشغيل الصوت
-                </audio>
-              </div>
-            )}
-          </Wrapper>
-        </Container>
+              return (
+                <SurahItem key={surah.id}>
+                  <SurahTitle>{`${surah.id} - ${surah.name}`}</SurahTitle>
+                  <Buttons>
+                    <Button play onClick={() => handlePlay(surah.id)}>
+                      {currentAudio === audioUrl && isPlaying
+                        ? "⏸ إيقاف "
+                        : "▶ تشغيل"}
+                    </Button>
+                    <Button as="a" href={audioUrl} download>
+                      ⬇ تحميل
+                    </Button>
+                  </Buttons>
+                </SurahItem>
+              );
+            })}
+          </SurahList>
+          {currentAudio && (
+            <div
+              style={{
+                position: "fixed",
+                bottom: 0,
+                left: "400px",
+                width: "50%",
+                padding: "10px",
+                zIndex: 9999,
+              }}
+            >
+              <AudioPlayer
+                src={currentAudio}
+                autoPlay
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                style={{ borderRadius: "10px" }}
+              />
+            </div>
+          )}
+        </Wrapper>
       )}
-    </div>
+    </Main>
   );
 }

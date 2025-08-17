@@ -2,31 +2,34 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const AlphabetBar = styled.div`
+  margin-top: 33px;
   position: absolute;
   top: 2%;
   left: 0;
   display: flex;
+  z-index: 500;
   flex-direction: column;
+  width: 50px;
   background: #e3e9ee;
   border-radius: 0 10px 10px 0;
   overflow: hidden;
   @media (max-width: 767px) {
-    top: -2px;
+    top: 109px;
   }
 `;
 
 const Letter = styled.button`
   background: ${(props) => (props.active ? "#239fb8" : "transparent")};
   border: none;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
   color: ${(props) => (props.active ? "#ffffffff" : "#000")};
   font-size: 12px;
   transition: background 0.3s;
-
+  border-bottom: 1px solid #c99393;
   &:hover {
-    background: ##239fb8;
-    color: #239fb8;
+    background: #239fb8;
+    color: #ffffffff;
   }
 `;
 
