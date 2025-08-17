@@ -3,8 +3,18 @@ import { useParams } from "react-router-dom";
 import Loader from "../component/Comon/Loader";
 import Container from "../component/Comon/Container";
 import styled from "styled-components";
-import AudioPlayer from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
+const Audio = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 400px;
+  width: 50%;
+  padding: 10px;
+  zindex: 9999;
+  @media (max-width: 767px) {
+    width: 90%;
+    left: 30px;
+  }
+`;
 const Wrapper = styled.div`
   padding: 20px;
   max-width: 900px;
@@ -205,24 +215,18 @@ export default function ReciterDetails() {
             })}
           </SurahList>
           {currentAudio && (
-            <div
-              style={{
-                position: "fixed",
-                bottom: 0,
-                left: "400px",
-                width: "50%",
-                padding: "10px",
-                zIndex: 9999,
-              }}
-            >
-              <AudioPlayer
-                src={currentAudio}
-                autoPlay
+            <Audio>
+              <audio
+                ref={audioRef}
+                controls
+                style={{ width: "100%" }}
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
-                style={{ borderRadius: "10px" }}
-              />
-            </div>
+              >
+                <source src={currentAudio} type="audio/mpeg" />
+                متصفحك لا يدعم تشغيل الصوت
+              </audio>
+            </Audio>
           )}
         </Wrapper>
       )}
