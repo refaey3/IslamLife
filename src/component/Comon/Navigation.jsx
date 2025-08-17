@@ -13,7 +13,7 @@ const NabBar = styled("nav")`
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  height: 60px;
+  height: 40px;
   border-radius: 5px;
   padding: 20px 20px;
   color: white;
@@ -26,8 +26,8 @@ const NabBar = styled("nav")`
   }
 `;
 const Logo = styled("img")`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: contain;
   cursor: pointer;
