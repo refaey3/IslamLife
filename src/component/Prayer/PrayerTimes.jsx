@@ -161,7 +161,7 @@ export default function PrayerTimes() {
       if (timings && nextPrayer) {
         setTimeLeft(calculateTimeLeft(timings[nextPrayer]));
       }
-    }, 100000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [timings, nextPrayer]);
