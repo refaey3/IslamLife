@@ -4,7 +4,7 @@ import Layout from "./component/Comon/Layout";
 import "./App.css";
 import ReciterDetails from "./pages/ReciterDetails";
 import Home from "./pages/Home";
-import Live from "./pages/live";
+import Live from "./pages/Live";
 import Favorites from "./pages/Favorites";
 import Azkar from "./pages/Azkar";
 import Quran from "./pages/Quran";
