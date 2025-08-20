@@ -89,6 +89,7 @@ const Input = styled("input")`
   @media (max-width: 768px) {
     max-width: 90%;
     font-size: 14px;
+    left: 15px;
   }
 `;
 export default function RecitersList() {
@@ -96,7 +97,14 @@ export default function RecitersList() {
   const [reciters, setReciters] = useState([]);
   const [selectedLetter, setSelectedLetter] = useState("الكل");
   const [searchTerm, setSearchTerm] = useState("");
-  const [visbleCount, setVisbleCount] = useState(30);
+  const [visbleCount, setVisbleCount] = useState(() => {
+    if (window.innerWidth >= 1200) {
+      return 50; // الشاشات الكبيرة
+    } else {
+      return 22; // الموبايل/التابلت
+    }
+  });
+
   useEffect(() => {
     const recitersApi = async () => {
       try {
@@ -123,7 +131,7 @@ export default function RecitersList() {
   });
   return (
     <div>
-      <CardContainer>
+      <CardContainer id="rec">
         <Titel>قائمة المقرئين</Titel>
         <Input
           type="text"

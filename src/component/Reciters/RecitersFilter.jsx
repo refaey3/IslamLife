@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const AlphabetBar = styled.div`
-  margin-top: 33px;
   position: absolute;
   top: 2%;
   left: 0;
@@ -11,17 +10,17 @@ const AlphabetBar = styled.div`
   flex-direction: column;
   width: 50px;
   background: #e3e9ee;
-  border-radius: 0 10px 10px 0;
   overflow: hidden;
+  border-radius: 0 10px 10px 0;
   @media (max-width: 767px) {
-    top: 109px;
+    top: 50px;
   }
 `;
 
 const Letter = styled.button`
   background: ${(props) => (props.active ? "#239fb8" : "transparent")};
   border: none;
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
   color: ${(props) => (props.active ? "#ffffffff" : "#000")};
   font-size: 12px;

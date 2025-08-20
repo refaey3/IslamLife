@@ -1,10 +1,18 @@
 import React from "react";
-import RecitersList from "./component/Reciters/RecitersList";
-import Home from "./pages/Home";
-import ReciterDetails from "./pages/ReciterDetails";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./App.css";
 import Layout from "./component/Comon/Layout";
+import "./App.css";
+import ReciterDetails from "./pages/ReciterDetails";
+import Home from "./pages/Home";
+import Live from "./pages/live";
+import Favorites from "./pages/Favorites";
+import Azkar from "./pages/Azkar";
+import Quran from "./pages/Quran";
+import Ruqyah from "./pages/Ruqyah";
+import Duaa from "./pages/Duaa";
+import Ibadat from "./pages/Ibadat";
+import AllahNames from "./pages/AllahNames";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +25,38 @@ const router = createBrowserRouter([
       {
         path: "reciter/:id",
         element: <ReciterDetails />,
+      },
+      {
+        path: "/Live",
+        element: <Live />,
+      },
+      {
+        path: "/Favorites",
+        element: <Favorites />,
+      },
+      {
+        path: "/Quran",
+        element: <Quran />,
+      },
+      {
+        path: "/Ruqyah",
+        element: <Ruqyah />,
+      },
+      {
+        path: "/Ibadat",
+        element: <Ibadat />,
+      },
+      {
+        path: "/Duaa",
+        element: <Duaa />,
+      },
+      {
+        path: "/AllahNames",
+        element: <AllahNames />,
+      },
+      {
+        path: "/Azkar",
+        element: <Azkar />,
       },
     ],
   },
