@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import json from "../json.json"
+import json from "../json/json.json"
 export function useFetchAzkar() {
   const [morningAzkar, setMorningAzkar] = useState([]);
   const [eveningAzkar, setEveningAzkar] = useState([]);

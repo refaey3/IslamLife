@@ -11,6 +11,7 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
 `;
+
 const Titel = styled.h2`
   color: orange;
   font-size: 47px;
@@ -19,15 +20,14 @@ const Titel = styled.h2`
   top: 14px;
   font-weight: bold;
 `;
-
-export default function Morning() {
-  const { morningAzkar } = useFetchAzkar();
+export default function MiscellaneousAzkar() {
+  const { mosqueAzkar } = useFetchAzkar();
 
   return (
     <Container>
-      <Titel>اذكار الصباح</Titel>
+      <Titel>أذكار دخول المسجد </Titel>
       <OverLay />
-      <AzkarCard api={morningAzkar} />
+      <AzkarCard api={mosqueAzkar} />
     </Container>
   );
 }

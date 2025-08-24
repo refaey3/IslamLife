@@ -43,14 +43,21 @@ const Ovelay = styled("div")`
   z-index: 5;
 `;
 export default function Azkar() {
-  const navigate = useNavigate();
-
   const categories = [
-    { title: "الصباح", path: "/Morning" },
-    {
-      title: "المساء",
-      path: "/EveningAzkar",
-    },
+    { title: "أذكار الصباح", path: "/Morning" },
+    { title: "أذكار المساء", path: "/EveningAzkar" },
+    { title: "أذكار النوم", path: "/SleepAzkar" },
+    { title: "أذكار الاستيقاظ", path: "/WakeUpAzkar" },
+    { title: "أذكار الوضوء", path: "/WuduAzkar" },
+    { title: "أذكار المسجد", path: "/MosqueAzkar" },
+    { title: "أذكار المنزل", path: "/HomeAzkar" },
+    { title: "دعاء دخول الخلاء", path: "/KhalaAzkar" },
+    { title: "أذكار الحج والعمرة", path: "/HajjAndUmrahAzkar" },
+    { title: "أذكار عن الطعام", path: "/FoodAzkar" },
+    { title: "أذكار متنوعة", path: "/MiscellaneousAzkar" },
+    { title: "الدعاء عن الاذان", path: "/AdhanAzkar" },
+    { title: "أذكار الصلاة", path: "/PrayerAzkar" },
+    { title: "أذكار بعد الصلاة", path: "/PrayerLaterAzkar" },
   ];
   return (
     <Main>
