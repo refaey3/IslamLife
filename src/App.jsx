@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./component/Comon/Layout";
+import ScrollToTop from "./component/Comon/ScrollToTop";
 import "./App.css";
 import ReciterDetails from "./pages/ReciterDetails";
 import Home from "./pages/Home";
@@ -12,11 +13,17 @@ import Ruqyah from "./pages/Ruqyah";
 import Duaa from "./pages/Duaa";
 import Ibadat from "./pages/Ibadat";
 import AllahNames from "./pages/AllahNames";
-
+import Morning from "./component/azkarCorner/Morning";
+import EveningAzkar from "./component/azkarCorner/EveningAzkar";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <>
+        <ScrollToTop />
+        <Layout />
+      </>
+    ),
     children: [
       {
         index: true,
@@ -57,6 +64,14 @@ const router = createBrowserRouter([
       {
         path: "/Azkar",
         element: <Azkar />,
+      },
+      {
+        path: "/Morning",
+        element: <Morning />,
+      },
+      {
+        path: "/EveningAzkar",
+        element: <EveningAzkar />,
       },
     ],
   },

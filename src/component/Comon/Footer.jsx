@@ -1,7 +1,16 @@
-import React from 'react'
-
+import React from "react";
+import styled from "styled-components";
+const Foot = styled("div")`
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 18px;
+`;
 export default function Footer() {
-  return (
-    <div>Footer</div>
-  )
+  return <Foot>وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ</Foot>;
 }

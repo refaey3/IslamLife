@@ -10,7 +10,7 @@ const NabBar = styled("nav")`
   gap: 12px;
   padding: 10px 18px;
 
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 26%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   height: 50px;
@@ -120,19 +120,18 @@ const BurgerIconAndHome = styled("div")`
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
-  
-    const handleGoToReciters = () => {
-      navigate("/");
-  
-      setTimeout(() => {
-        window.scrollTo({
-          top: 1400, 
-          behavior: "smooth",
-        });
-      }, 100); 
-      
-      }
+  const navigate = useNavigate();
+
+  const handleGoToReciters = () => {
+    navigate("/");
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: 1400,
+        behavior: "smooth",
+      });
+    }, 100);
+  };
   return (
     <>
       <NabBar>
@@ -157,7 +156,7 @@ export default function Navigation() {
               </Link>
             </li>
           </Links>
-          <BurgerIconAndHome  onClick={() => setIsOpen(!isOpen)}>
+          <BurgerIconAndHome onClick={() => setIsOpen(!isOpen)}>
             <Link to={"/"} style={{ textDecoration: "none" }}>
               <p>الرئيسية</p>
             </Link>
