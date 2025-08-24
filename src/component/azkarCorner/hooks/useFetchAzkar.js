@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import json from "../json.json"
 export function useFetchAzkar() {
   const [morningAzkar, setMorningAzkar] = useState([]);
   const [eveningAzkar, setEveningAzkar] = useState([]);
@@ -22,8 +22,6 @@ export function useFetchAzkar() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await fetch("https://alquran.vip/APIs/azkar");
-        const json = await res.json();
         setMorningAzkar(json.morning_azkar || []);
         setEveningAzkar(json.evening_azkar || []);
         setPrayerAzkar(json.prayer_azkar || []);
