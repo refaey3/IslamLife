@@ -17,7 +17,7 @@ const SideBarContainer = styled.div`
   position: fixed;
   top: 50px;
   right: ${({ isOpen }) => (isOpen ? "0" : "-260px")};
-  width: 168px;
+  width: 170px;
   height: calc(100vh - 51px);
   background: rgba(107, 112, 92, 0.9); /* لون خلفية مشابه للتصميم */
   border: 1px solid rgba(255, 255, 255, 0.2);

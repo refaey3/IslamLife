@@ -99,9 +99,9 @@ export default function RecitersList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [visbleCount, setVisbleCount] = useState(() => {
     if (window.innerWidth >= 1200) {
-      return 50; // الشاشات الكبيرة
+      return 50; 
     } else {
-      return 22; // الموبايل/التابلت
+      return 17; 
     }
   });
 
