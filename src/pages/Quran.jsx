@@ -1,40 +1,59 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
+import json from "../component/json/quran.json";
+import styled from "styled-components";
+const Container = styled.div`
+  padding: 20px;
+  background: #fdfcf7;
+  min-height: 100vh;
+  font-family: "Amiri", serif;
+`;
+const Titel = styled.h2`
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #2c3e50;
+`;
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background: #fffefa;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+`;
+const PageBox = styled.div`
+  text-align: center;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 20px;
+`;
+const PageImg = styled.img`
+  width: 40%;
+  max-width: 800px;
+  border: 3px solid #16a085;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  @media (max-width: 757px) {
+    width: 85%;
+  }
+`;
 export default function Quran() {
-  const [pages, setPages] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://alquran.vip/APIs/quranPagesImage")
-      .then((res) => res.json())
-      .then((data) => {
-        setPages(data.pages); // هنا بقى مظبوط
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching Quran pages:", err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>جاري التحميل...</p>;
-
   return (
-    <div style={{ textAlign: "center", marginTop: "20px" }}>
-      {pages.map((page) => (
-        <div key={page.page_number} style={{ marginBottom: "30px" }}>
-          <img
-            src={page.page_url}
-            alt={`صفحة ${page.page_number}`}
-            style={{
-              width: "50%",
-              border: "1px solid #ddd",
-              borderRadius: "8px",
-            }}
-          />
-          <p>صفحة {page.page_number}</p>
-        </div>
-      ))}
-    </div>
+    <Container>
+      <Titel> المصحف الشريف</Titel>
+
+      <diPageWrapperv>
+        {json.pages.map((page) => (
+          <PageBox key={page.page_number}>
+            <PageImg src={page.page_url} alt={`صفحة ${page.page_number}`} />
+          </PageBox>
+        ))}
+      </diPageWrapperv>
+    </Container>
   );
 }
