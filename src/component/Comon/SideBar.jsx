@@ -46,7 +46,7 @@ const Menu = styled.ul`
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       padding: 8px;
       border-radius: 8px;
       transition: all 0.3s ease;
