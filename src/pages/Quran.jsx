@@ -1,6 +1,8 @@
 import React from "react";
 import json from "../component/json/quran.json";
 import styled from "styled-components";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 const Container = styled.div`
   padding: 20px;
   background: #fdfcf7;
@@ -42,18 +44,32 @@ const PageImg = styled.img`
     width: 85%;
   }
 `;
+const StyledLazyImage = styled(LazyLoadImage)`
+  width: 40%;
+  max-width: 800px;
+  border: 3px solid #16a085;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: 757px) {
+    width: 85%;
+  }
+`;
 export default function Quran() {
   return (
     <Container>
       <Titel> المصحف الشريف</Titel>
 
-      <diPageWrapperv>
-        {json.pages.map((page) => (
-          <PageBox key={page.page_number}>
-            <PageImg src={page.page_url} alt={`صفحة ${page.page_number}`} />
-          </PageBox>
-        ))}
-      </diPageWrapperv>
+      {json.pages.map((page) => (
+        <PageBox key={page.page_number}>
+          <StyledLazyImage
+            effect="blur"
+            src={page.page_url}
+            alt={`صفحة ${page.page_number}`}
+          />
+        </PageBox>
+      ))}
     </Container>
   );
 }
