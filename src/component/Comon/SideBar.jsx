@@ -1,7 +1,7 @@
 // SideBar.js
 import React from "react";
 import styled from "styled-components";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaBookReader,
   FaVideo,
@@ -64,7 +64,7 @@ const ChangeLi = styled.li`
     display: none;
   }
 `;
-export default function SideBar({ isOpen}) {
+export default function SideBar({ isOpen }) {
   const navigate = useNavigate();
 
   const handleGoToReciters = () => {
@@ -72,10 +72,10 @@ export default function SideBar({ isOpen}) {
 
     setTimeout(() => {
       window.scrollTo({
-        top: 1500, 
+        top: 1500,
         behavior: "smooth",
       });
-    }, 100); 
+    }, 100);
   };
   return (
     <SideBarContainer isOpen={isOpen}>
@@ -96,15 +96,11 @@ export default function SideBar({ isOpen}) {
           </Link>
         </ChangeLi>
         <li>
-          <Link onClick={handleGoToReciters} >
+          <Link onClick={handleGoToReciters}>
             <FaBookReader /> القراء
           </Link>
         </li>
-        <li>
-          <Link to="/Duaa">
-            <FaPray /> الدعاء والأذكار
-          </Link>
-        </li>
+
         <li>
           <Link to="/AllahNames">
             <FaDharmachakra /> أسماء الله الحسنى
@@ -123,11 +119,6 @@ export default function SideBar({ isOpen}) {
         <li>
           <Link to="/Ruqyah">
             <FaShieldAlt /> الرقية الشرعية
-          </Link>
-        </li>
-        <li>
-          <Link to="/Ibadat">
-            <FaMosque /> عبادات
           </Link>
         </li>
       </Menu>
