@@ -150,11 +150,6 @@ export default function Navigation() {
                 <FaVideo size={18} /> مباشر
               </Link>
             </li>
-            <li>
-              <Link to="/Favorites">
-                <FaStar size={18} /> المفضلة
-              </Link>
-            </li>
           </Links>
           <BurgerIconAndHome onClick={() => setIsOpen(!isOpen)}>
             <Link to={"/"} style={{ textDecoration: "none" }}>

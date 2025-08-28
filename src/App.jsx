@@ -6,7 +6,6 @@ import "./App.css";
 import ReciterDetails from "./pages/ReciterDetails";
 import Home from "./pages/Home";
 import Live from "./pages/Live";
-import Favorites from "./pages/Favorites";
 import Azkar from "./pages/Azkar";
 import Quran from "./pages/Quran";
 import Ruqyah from "./pages/Ruqyah";
@@ -48,10 +47,7 @@ const router = createBrowserRouter([
         path: "/Live",
         element: <Live />,
       },
-      {
-        path: "/Favorites",
-        element: <Favorites />,
-      },
+
       {
         path: "/Quran",
         element: <Quran />,
@@ -60,8 +56,7 @@ const router = createBrowserRouter([
         path: "/Ruqyah",
         element: <Ruqyah />,
       },
-      
-    
+
       {
         path: "/AllahNames",
         element: <AllahNames />,

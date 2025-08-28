@@ -85,11 +85,7 @@ export default function SideBar({ isOpen }) {
             <FaMosque /> الرئيسية
           </Link>
         </ChangeLi>
-        <ChangeLi>
-          <Link to="/Favorites">
-            <FaStar /> المفضلة
-          </Link>
-        </ChangeLi>
+       
         <ChangeLi>
           <Link to="/Live">
             <FaVideo /> مباشر
