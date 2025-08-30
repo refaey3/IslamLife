@@ -74,7 +74,7 @@ export default function Haddith() {
         {hadith ? (
           <>
             <HadithBox>{hadith.hadithArabic}</HadithBox>
-            <Book>المصدر📚 {hadith.book.bookName}</Book>
+            <Book>المصدر : {hadith.book.bookName}</Book>
           </>
         ) : (
           <p>جاري تحميل الحديث...</p>
