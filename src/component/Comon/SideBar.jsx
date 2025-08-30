@@ -2,6 +2,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
+
 import {
   FaBookReader,
   FaVideo,
@@ -19,7 +21,7 @@ const SideBarContainer = styled.div`
   right: ${({ isOpen }) => (isOpen ? "0" : "-260px")};
   width: 173px;
   height: calc(100vh - 51px);
-  background: rgba(107, 112, 92, 0.9); 
+  background: rgba(107, 112, 92, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
@@ -64,7 +66,24 @@ const ChangeLi = styled.li`
     display: none;
   }
 `;
-export default function SideBar({ isOpen }) {
+export default function SideBar({ isOpen, onClose }) {
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
+        onClose();
+      }
+    }
+
+    if (isOpen) {
+      window.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
+
   const navigate = useNavigate();
 
   const handleGoToReciters = () => {
@@ -76,18 +95,19 @@ export default function SideBar({ isOpen }) {
         behavior: "smooth",
       });
     }, 100);
+    onClose();
   };
   return (
-    <SideBarContainer isOpen={isOpen}>
+    <SideBarContainer ref={sidebarRef} isOpen={isOpen}>
       <Menu>
         <ChangeLi>
-          <Link to="/">
+          <Link to="/" onClick={onClose}>
             <FaMosque /> الرئيسية
           </Link>
         </ChangeLi>
-       
+
         <ChangeLi>
-          <Link to="/Live">
+          <Link to="/Live" onClick={onClose}>
             <FaVideo /> مباشر
           </Link>
         </ChangeLi>
@@ -98,23 +118,18 @@ export default function SideBar({ isOpen }) {
         </li>
 
         <li>
-          <Link to="/AllahNames">
+          <Link to="/AllahNames" onClick={onClose}>
             <FaDharmachakra /> أسماء الله الحسنى
           </Link>
         </li>
         <li>
-          <Link to="/Azkar">
+          <Link to="/Azkar" onClick={onClose}>
             <FaPray /> أذكار إسلامية
           </Link>
         </li>
         <li>
-          <Link to="/Quran">
+          <Link to="/Quran" onClick={onClose}>
             <FaQuran /> القرآن الكريم
-          </Link>
-        </li>
-        <li>
-          <Link to="/Ruqyah">
-            <FaShieldAlt /> الرقية الشرعية
           </Link>
         </li>
       </Menu>

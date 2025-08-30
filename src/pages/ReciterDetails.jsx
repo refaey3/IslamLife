@@ -5,15 +5,17 @@ import Container from "../component/Comon/Container";
 import styled from "styled-components";
 const Audio = styled.div`
   position: fixed;
-  bottom: 0;
+  bottom: -16px;
   left: 400px;
   width: 50%;
   padding: 10px;
-  zindex: 9999;
+  z-index: 9999;
   @media (max-width: 767px) {
     width: 90%;
     left: 30px;
   }
+
+
 `;
 const Wrapper = styled.div`
   padding: 20px;

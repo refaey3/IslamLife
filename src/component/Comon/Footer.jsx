@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 const Foot = styled("div")`
-  position: relative;
-  bottom: 0;
+  position: absolute;
+  bottom: -39px;
   left: 0;
   width: 100%;
   background: black;

@@ -160,7 +160,7 @@ export default function Navigation() {
           <BurgerIconAndHome></BurgerIconAndHome>
         </Rigth>
       </NabBar>
-      <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <SideBar isOpen={isOpen}  onClose={() => setIsOpen(false)} />
     </>
   );
 }

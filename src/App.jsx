@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import Live from "./pages/Live";
 import Azkar from "./pages/Azkar";
 import Quran from "./pages/Quran";
-import Ruqyah from "./pages/Ruqyah";
 import AllahNames from "./pages/AllahNames";
 
 import Morning from "./component/azkarCorner/Morning";
@@ -51,10 +50,6 @@ const router = createBrowserRouter([
       {
         path: "/Quran",
         element: <Quran />,
-      },
-      {
-        path: "/Ruqyah",
-        element: <Ruqyah />,
       },
 
       {
