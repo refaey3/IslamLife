@@ -5,12 +5,28 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { title } from "framer-motion/client";
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 20px;
+  gap: 25px;
   padding: 20px;
   position: relative;
   z-index: 8;
+
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  @media (max-width: 768px) {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+
 `;
+
 
 const Card = styled.div`
   background: white;

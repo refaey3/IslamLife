@@ -5,7 +5,7 @@ const Foot = styled("div")`
   bottom: -39px;
   left: 0;
   width: 100%;
-  background: black;
+  background: linear-gradient(90deg, #2c5364, #203a43, #0f2027);
   color: white;
   text-align: center;
   padding: 10px 0;

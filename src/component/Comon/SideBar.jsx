@@ -118,11 +118,6 @@ export default function SideBar({ isOpen, onClose }) {
         </li>
 
         <li>
-          <Link to="/AllahNames" onClick={onClose}>
-            <FaDharmachakra /> أسماء الله الحسنى
-          </Link>
-        </li>
-        <li>
           <Link to="/Azkar" onClick={onClose}>
             <FaPray /> أذكار إسلامية
           </Link>
@@ -130,6 +125,12 @@ export default function SideBar({ isOpen, onClose }) {
         <li>
           <Link to="/Quran" onClick={onClose}>
             <FaQuran /> القرآن الكريم
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/AllahNames" onClick={onClose}>
+            <FaDharmachakra /> أسماء الله الحسنى
           </Link>
         </li>
       </Menu>

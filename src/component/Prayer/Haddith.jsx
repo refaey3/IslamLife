@@ -66,7 +66,6 @@ export default function Haddith() {
       })
       .catch((err) => console.error(err));
   }, []);
-
   return (
     <Main>
       <Container>
@@ -74,7 +73,7 @@ export default function Haddith() {
         {hadith ? (
           <>
             <HadithBox>{hadith.hadithArabic}</HadithBox>
-            <Book>المصدر : {hadith.book.bookName}</Book>
+            <Book>المصدر : صحيح البخاري</Book>
           </>
         ) : (
           <p>جاري تحميل الحديث...</p>
