@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
   padding: 10px;
   @media (max-width: 767px) {
-    height: 90vh;
+    padding-top: 86px;
   }
 `;
 
@@ -70,7 +70,7 @@ const StyledImage = styled(LazyLoadImage)`
     max-width: 100%;
   }
   @media (max-width: 767px) {
-    height: 73vh;
+    height: 69vh;
   }
 `;
 
@@ -241,10 +241,10 @@ export default function Quran() {
 
     if (diff > 50) {
       // swipe left → next
-      handleNext();
+      handlePrev();
     } else if (diff < -50) {
       // swipe right → prev
-      handlePrev();
+      handleNext();
     }
 
     setTouchStartX(null);
@@ -268,8 +268,8 @@ export default function Quran() {
 
       <PageBox onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <NavButton
-          onClick={handlePrev}
-          disabled={isFirstPage}
+          onClick={handleNext}
+          disabled={currentPage === 604}
           aria-label="السابق"
         >
           ◀
@@ -282,8 +282,8 @@ export default function Quran() {
         />
 
         <NavButton
-          onClick={handleNext}
-          disabled={currentPage === 604}
+          onClick={handlePrev}
+          disabled={isFirstPage}
           aria-label="التالي"
         >
           ▶
