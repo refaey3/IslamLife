@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import json from "../component/json/quran.json";
 import styled from "styled-components";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -218,11 +217,9 @@ export default function Quran() {
     setCurrentPage(parseInt(e.target.value));
   };
 
-  const handleNext = () =>
-    setCurrentPage((p) => Math.min(p + 1, json.pages.length));
+  const handleNext = () => setCurrentPage((p) => Math.min(p + 1, 604));
   const handlePrev = () => setCurrentPage((p) => Math.max(p - 1, 1));
 
-  const page = json.pages.find((p) => p.page_number === currentPage);
   const isFirstPage = currentPage === 1;
 
   return (
@@ -241,31 +238,29 @@ export default function Quran() {
         </Dropdown>
       </Header>
 
-      {page && (
-        <PageBox>
-          <NavButton
-            onClick={handlePrev}
-            disabled={isFirstPage}
-            aria-label="السابق"
-          >
-            ◀
-          </NavButton>
+      <PageBox>
+        <NavButton
+          onClick={handleNext}
+          disabled={currentPage === 604}
+          aria-label="السابق"
+        >
+          ◀
+        </NavButton>
 
-          <StyledImage
-            src={page.page_url}
-            alt={`صفحة ${page.page_number}`}
-            effect="blur"
-          />
+        <StyledImage
+          src={`https://quran.ksu.edu.sa/png_big/${currentPage}.png`}
+          alt={`صفحة ${currentPage}`}
+          effect="blur"
+        />
 
-          <NavButton
-            onClick={handleNext}
-            disabled={currentPage === json.pages.length}
-            aria-label="التالي"
-          >
-            ▶
-          </NavButton>
-        </PageBox>
-      )}
+        <NavButton
+          onClick={handlePrev}
+          disabled={isFirstPage}
+          aria-label="التالي"
+        >
+          ▶
+        </NavButton>
+      </PageBox>
     </Container>
   );
 }
