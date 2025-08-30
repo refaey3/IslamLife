@@ -9,7 +9,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
+  @media (max-width: 767px) {
+    height: 90vh;
+  }
 `;
 
 const Header = styled.div`
@@ -45,7 +48,7 @@ const Dropdown = styled.select`
 const PageBox = styled.div`
   text-align: center;
   background: #fffefa;
-  padding: 12px;
+  padding: 10px;
   border-radius: 12px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   max-width: 100%;
@@ -55,6 +58,7 @@ const PageBox = styled.div`
   align-items: center;
   justify-content: center;
   gap: 6px;
+  overflow: hidden;
 `;
 
 const StyledImage = styled(LazyLoadImage)`
@@ -64,6 +68,9 @@ const StyledImage = styled(LazyLoadImage)`
 
   @media (max-width: 600px) {
     max-width: 100%;
+  }
+  @media (max-width: 767px) {
+    height: 73vh;
   }
 `;
 
@@ -92,7 +99,6 @@ const NavButton = styled.button`
     height: 32px;
   }
 `;
-
 const surahs = [
   { name: "الفاتحة", start: 1 },
   { name: "البقرة", start: 2 },
@@ -212,6 +218,7 @@ const surahs = [
 
 export default function Quran() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [touchStartX, setTouchStartX] = useState(null);
 
   const handleSurahChange = (e) => {
     setCurrentPage(parseInt(e.target.value));
@@ -221,6 +228,27 @@ export default function Quran() {
   const handlePrev = () => setCurrentPage((p) => Math.max(p - 1, 1));
 
   const isFirstPage = currentPage === 1;
+
+  // swipe detect
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStartX) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+
+    if (diff > 50) {
+      // swipe left → next
+      handleNext();
+    } else if (diff < -50) {
+      // swipe right → prev
+      handlePrev();
+    }
+
+    setTouchStartX(null);
+  };
 
   return (
     <Container>
@@ -238,10 +266,10 @@ export default function Quran() {
         </Dropdown>
       </Header>
 
-      <PageBox>
+      <PageBox onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <NavButton
-          onClick={handleNext}
-          disabled={currentPage === 604}
+          onClick={handlePrev}
+          disabled={isFirstPage}
           aria-label="السابق"
         >
           ◀
@@ -254,8 +282,8 @@ export default function Quran() {
         />
 
         <NavButton
-          onClick={handlePrev}
-          disabled={isFirstPage}
+          onClick={handleNext}
+          disabled={currentPage === 604}
           aria-label="التالي"
         >
           ▶
